@@ -2,6 +2,8 @@
 import Phaser from 'phaser';
 import CorgiSwim from '../sprites/CorgiSwim';
 import lang from '../lang';
+import config from '../config';
+
 
 export default class extends Phaser.State {
   init() { }
@@ -11,7 +13,7 @@ export default class extends Phaser.State {
   create() {
     const bannerText = lang.text('welcome');
     const banner = this.add.text(this.world.centerX, 80, bannerText, {
-      font: '40px Bangers',
+      font: config.defaultFont,
       fill: '#77BFA3',
       smoothed: false,
     });
@@ -28,9 +30,7 @@ export default class extends Phaser.State {
       inputEnabled: true,
     });
     this.corgiSwim.swim();
-    this.corgiSwim.addOnClickListener(() => {
-      console.log('corgi was clicked');
-    });
+    this.corgiSwim.addOnClickListener(() => this.state.start('Game'));
   }
 
   render() {
