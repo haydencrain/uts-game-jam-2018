@@ -4,4 +4,9 @@ export const centerGameObjects = (objects) => {
   });
 };
 
-export const getRandomNumber = (num1, num2) => Math.floor(Math.random() * (num2)) + num1;
+export const getRandomNumber = (min, max) => Math.random() * (max - min) + min;
+
+
+export const getRandomX = (x, width) => getRandomNumber(x, (x + width));
+
+export const getRandomY = (y, height) => getRandomNumber(y, (y + height));

@@ -7,4 +7,5 @@ export default {
   smallerFont: '20px Press Start 2P',
   menuFont: '15px Press Start 2P',
   submenuFont: '10px Press Start 2P',
+  borkFont: '12px Press Start 2P',
 };
