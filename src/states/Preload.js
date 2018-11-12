@@ -20,6 +20,7 @@ export default class extends Phaser.State {
     this.load.spritesheet('corgi-swim', 'assets/sprite-models/corgi-swim/corgi-swim.png', 700, 700, 12);
     this.load.spritesheet('running-left-corgi', 'assets/sprite-models/running-left-corgi/running-left-corgi-spritesheet.png', 50, 40, 8);
     this.load.spritesheet('running-right-corgi', 'assets/sprite-models/running-right-corgi/running-right-corgi-spritesheet.png', 50, 40, 8);
+    this.load.spritesheet('sitting-doggo-right', 'assets/sprite-models/sitting-doggo-right/sitting-doggo-right.png', 60, 50, 2);
     this.load.spritesheet('grandma', 'assets/sprite-models/grandma/grandma_placeholder.png', 200, 200, 5);
   }
 

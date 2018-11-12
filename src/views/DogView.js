@@ -1,5 +1,6 @@
 import config from '../config';
 import RunningCorgi from '../sprites/RunningCorgi';
+import SittingDog from '../sprites/SittingDog';
 
 
 export default class DogView {
@@ -33,18 +34,20 @@ export default class DogView {
     this.score.anchor.setTo(0.5);
 
 
-    this.dog = new RunningCorgi({
+    this.dog = new SittingDog({
       game: this.gameState.game,
       x: this.getCenterX(),
       y: this.getCenterY() + 10,
       scaleX: 2,
       scaleY: 2,
       anchor: 0.5,
-      asset: 'running-right-corgi',
       inputEnabled: true,
     });
-    this.dog.addOnClickListener(() => this.incrementBorkpower());
-    this.dog.run();
+    this.dog.addOnMouseDownListener(() => {
+      this.incrementBorkpower();
+      this.dog.bark();
+    });
+    this.dog.idle();
   }
 
   update() {
