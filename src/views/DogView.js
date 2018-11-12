@@ -14,7 +14,7 @@ export default class DogView {
 
   create() {
     const scoreText = this.gameState.globalData.score.toString();
-    this.score = this.state.add.text(this.gameState.world.centerX, 80, scoreText, {
+    this.score = this.gameState.add.text(this.gameState.world.centerX, 80, scoreText, {
       font: config.defaultFont,
       fill: '#77BFA3',
       smoothed: false,
