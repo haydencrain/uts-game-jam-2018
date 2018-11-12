@@ -28,6 +28,9 @@ export default class extends Phaser.State {
 
     this.rightPanel = new MenuView({
       gameState: this,
+      height: 0,
+      width: 900,
+
 
     });
   }

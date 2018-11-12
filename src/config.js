@@ -5,4 +5,6 @@ export default {
   webfonts: ['Press Start 2P'],
   defaultFont: '28px Press Start 2P',
   smallerFont: '20px Press Start 2P',
+  menuFont: '15px Press Start 2P',
+  submenuFont: '10px Press Start 2P',
 };
