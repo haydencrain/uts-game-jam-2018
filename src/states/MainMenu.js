@@ -34,8 +34,5 @@ export default class extends Phaser.State {
   }
 
   render() {
-    if (__DEV__) {
-      this.game.debug.spriteInfo(this.corgiSwim, 32, 32);
-    }
   }
 }

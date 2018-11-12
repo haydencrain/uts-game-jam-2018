@@ -12,6 +12,7 @@ export default class DogView {
 
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
+    this.render = this.render.bind(this);
     this.getScoreString = this.getScoreString.bind(this);
     this.getCenterX = this.getCenterX.bind(this);
     this.getCenterY = this.getCenterY.bind(this);
@@ -47,6 +48,10 @@ export default class DogView {
   }
 
   update() {
+    // this.score.setText(this.getScoreString());
+  }
+
+  render() {
     this.score.setText(this.getScoreString());
   }
 

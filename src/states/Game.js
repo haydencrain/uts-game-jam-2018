@@ -43,4 +43,8 @@ export default class extends Phaser.State {
     this.middlePanel.update();
     this.rightPanel.update();
   }
+
+  render() {
+    this.leftPanel.render();
+  }
 }
