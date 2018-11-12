@@ -1,7 +1,7 @@
 
 export default class GrandmaView {
   constructor({ gameState, height, width, x, y }) {
-    this.state = gameState;
+    this.gameState = gameState;
     this.height = height;
     this.width = width;
     this.x = x;
@@ -12,7 +12,8 @@ export default class GrandmaView {
   }
 
   create() {
-
+    // add background
+    this.background = this.gameState.add.tileSprite(this.x, this.y, this.width, this.height, 'street_background');
   }
 
   update() {

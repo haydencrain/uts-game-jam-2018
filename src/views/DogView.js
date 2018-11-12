@@ -19,12 +19,15 @@ export default class DogView {
 
   create() {
     // add background
-    this.background = this.gameState.add.tileSprite(this.y, this.x, this.width, this.height, 'doggy_background');
+    this.background = this.gameState.add.tileSprite(this.x, this.y, this.width, this.height, 'doggy_background');
 
-    this.score = this.gameState.add.text(this.getCenterX(), this.y + 60, this.getScoreString(), {
+    this.score = this.gameState.add.text(this.getCenterX() - 10, this.height - 160, this.getScoreString(), {
       font: config.smallerFont,
       fill: '#77BFA3',
       smoothed: false,
+      wordWrap: true,
+      wordWrapWidth: 20,
+      align: 'center',
     });
     this.score.anchor.setTo(0.5);
 
@@ -32,7 +35,7 @@ export default class DogView {
     this.dog = new RunningCorgi({
       game: this.gameState.game,
       x: this.getCenterX(),
-      y: this.getCenterY() + 35,
+      y: this.getCenterY() + 10,
       scaleX: 2,
       scaleY: 2,
       anchor: 0.5,

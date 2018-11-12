@@ -13,14 +13,17 @@ export default class extends Phaser.State {
     this.leftPanel = new DogView({
       gameState: this,
       height: this.world.height,
-      width: this.world.width / 3,
+      width: 450,
       x: 0,
       y: 0,
     });
 
     this.middlePanel = new GrandmaView({
       gameState: this,
-
+      height: this.world.height,
+      width: 450,
+      x: 450,
+      y: 0,
     });
 
     this.rightPanel = new MenuView({

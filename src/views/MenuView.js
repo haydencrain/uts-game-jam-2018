@@ -1,7 +1,7 @@
 
 export default class MenuView {
   constructor({ gameState, height, width, x, y }) {
-    this.state = gameState;
+    this.gameState = gameState;
     this.height = height;
     this.width = width;
     this.x = x;
