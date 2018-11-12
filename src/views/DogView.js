@@ -1,7 +1,7 @@
 import config from '../config';
 // import RunningCorgi from '../sprites/RunningCorgi';
 import MainDog from '../sprites/MainDog';
-
+import BorkText from '../components/BorkText';
 
 export default class DogView {
   constructor({ gameState, height, width, x, y }) {
@@ -45,11 +45,21 @@ export default class DogView {
       anchor: 0.5,
       inputEnabled: true,
     });
+
     this.dog.addOnMouseDownListener(() => {
       this.isBarking = true;
       this.dog.bark();
+      this.borkText = new BorkText({
+        gameState: this.gameState,
+        x: this.getCenterX() + 60,
+        y: this.getCenterY() - 50,
+        width: 100,
+        height: 100,
+      });
     });
+
     this.dog.addOnMouseUpListener(() => {
+      this.borkText.finish();
       this.dog.unbark();
       this.incrementBorkpower();
       this.isBarking = false;
