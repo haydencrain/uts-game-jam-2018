@@ -1,49 +1,27 @@
 import Phaser from 'phaser';
-import { getRandomX, getRandomY } from '../utils';
-import config from '../config';
+import { getRandomNumber } from '../utils';
 
-export default class BorkText extends Phaser.Text {
+
+export default class BorkText {
   constructor({ gameState, height, width, x, y }) {
-    super(gameState.game, getRandomX(x, width), getRandomY(y, height), '', {
-      font: config.borkFont,
-      fill: '#FFFFFF',
-      smoothed: false,
-      wordWrap: true,
-      wordWrapWidth: 20,
-      align: 'center',
-    });
-    this.message = 'bo';
-    this.setText(this.message);
+    this.gameState = gameState;
+    this.height = height;
+    this.width = width;
+    this.x = x;
+    this.y = y;
 
-    this.finish = this.finish.bind(this);
+    this.text = 'bo';
 
-    this.game.add.existing(this);
-
-    this.counter = 0;
-    this.isFinished = false;
+    this.getRandomX = this.getRandomX.bind(this);
+    this.getRandomY = this.getRandomY.bind(this);
   }
 
-  update() {
-    if (!this.isFinished) {
-      if (this.counter >= 20) {
-        this.message += 'o';
-        this.counter = 0;
-        this.setText(this.message);
-      } else {
-        this.counter += 1;
-      }
-    }
+
+  getRandomX() {
+    return getRandomNumber(this.x, (this.x + this.width));
   }
 
-  render() {
-  }
-
-  finish() {
-    this.isFinished = true;
-    this.message += 'rk';
-    this.setText(this.message);
-    this.game.time.events.add(1000, () => {
-      this.game.world.remove(this);
-    });
+  getRandomY() {
+    return getRandomNumber(this.y, (this.y + this.height));
   }
 }
