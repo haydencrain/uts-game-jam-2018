@@ -1,6 +1,6 @@
 /* globals __DEV__ */
 import Phaser from 'phaser';
-import CorgiSwim from '../sprites/CorgiSwim';
+import RunningCorgi from '../sprites/RunningCorgi';
 import lang from '../lang';
 import config from '../config';
 
@@ -19,23 +19,19 @@ export default class extends Phaser.State {
     });
     banner.anchor.setTo(0.5);
 
-    this.corgiSwim = new CorgiSwim({
+    this.runningDog = new RunningCorgi({
       game: this.game,
       x: this.world.centerX,
       y: this.world.centerY,
-      scaleX: 0.5,
-      scaleY: 0.5,
+      scaleX: 2,
+      scaleY: 2,
       anchor: 0.5,
-      asset: 'corgi-swim',
       inputEnabled: true,
     });
-    this.corgiSwim.swim();
-    this.corgiSwim.addOnClickListener(() => this.state.start('Game'));
+    this.runningDog.run();
+    this.runningDog.addOnClickListener(() => this.state.start('Game'));
   }
 
   render() {
-    if (__DEV__) {
-      this.game.debug.spriteInfo(this.corgiSwim, 32, 32);
-    }
   }
 }

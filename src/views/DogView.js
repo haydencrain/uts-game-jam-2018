@@ -1,5 +1,6 @@
 import config from '../config';
-import RunningCorgi from '../sprites/RunningCorgi';
+// import RunningCorgi from '../sprites/RunningCorgi';
+import MainDog from '../sprites/MainDog';
 
 
 export default class DogView {
@@ -10,8 +11,11 @@ export default class DogView {
     this.x = x;
     this.y = y;
 
+    this.isBarking = false;
+
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
+    this.render = this.render.bind(this);
     this.getScoreString = this.getScoreString.bind(this);
     this.getCenterX = this.getCenterX.bind(this);
     this.getCenterY = this.getCenterY.bind(this);
@@ -32,21 +36,34 @@ export default class DogView {
     this.score.anchor.setTo(0.5);
 
 
-    this.dog = new RunningCorgi({
+    this.dog = new MainDog({
       game: this.gameState.game,
       x: this.getCenterX(),
       y: this.getCenterY() + 10,
       scaleX: 2,
       scaleY: 2,
       anchor: 0.5,
-      asset: 'running-right-corgi',
       inputEnabled: true,
     });
-    this.dog.addOnClickListener(() => this.incrementBorkpower());
-    this.dog.run();
+    this.dog.addOnMouseDownListener(() => {
+      this.isBarking = true;
+      this.dog.bark();
+    });
+    this.dog.addOnMouseUpListener(() => {
+      this.dog.unbark();
+      this.incrementBorkpower();
+      this.isBarking = false;
+    });
+
+    // initial animation is idle
+    this.dog.idle();
   }
 
   update() {
+    if (!this.isBarking) this.dog.idle();
+  }
+
+  render() {
     this.score.setText(this.getScoreString());
   }
 

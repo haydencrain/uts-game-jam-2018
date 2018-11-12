@@ -34,4 +34,6 @@ export default class extends Phaser.Sprite {
   update() {
     this.angle += 0;
   }
+
+  render() { }
 }
