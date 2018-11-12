@@ -13,7 +13,8 @@ export default class extends Phaser.State {
     // Load assets here
 
     // backgrounds
-    this.load.image('doggy_background', 'assets/background/doggy_background_3x.png');
+    this.load.image('doggy_background', 'assets/background/doggo_background_banner_3x.png');
+    this.load.image('street_background', 'assets/background/street_background_3x.png');
 
     // sprites
     this.load.spritesheet('corgi-swim', 'assets/sprite-models/corgi-swim/corgi-swim.png', 700, 700, 12);
