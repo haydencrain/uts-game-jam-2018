@@ -24,7 +24,7 @@ export default class extends Phaser.Sprite {
     }
 
     this.animations.add('idle', [0, 3], 2, true);
-    this.animations.add('bork', [1, 2], 8, false);
+    this.animations.add('bork', [1, 2], 6, false);
     this.animations.add('unbork', [2, 3], 8, false);
   }
 
