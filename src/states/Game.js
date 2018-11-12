@@ -1,6 +1,6 @@
 /* globals __DEV__ */
 import Phaser from 'phaser';
-import Mushroom from '../sprites/Mushroom';
+import CorgiSwim from '../sprites/CorgiSwim';
 import lang from '../lang';
 
 export default class extends Phaser.State {
@@ -19,19 +19,22 @@ export default class extends Phaser.State {
     banner.padding.set(10, 16);
     banner.anchor.setTo(0.5);
 
-    this.mushroom = new Mushroom({
+    this.corgiSwim = new CorgiSwim({
       game: this.game,
       x: this.world.centerX,
       y: this.world.centerY,
-      asset: 'mushroom',
+      scaleX: 0.5,
+      scaleY: 0.5,
+      anchor: 0.5,
+      asset: 'corgi-swim',
     });
 
-    this.game.add.existing(this.mushroom);
+    this.corgiSwim.swim();
   }
 
   render() {
     if (__DEV__) {
-      this.game.debug.spriteInfo(this.mushroom, 32, 32);
+      this.game.debug.spriteInfo(this.corgiSwim, 32, 32);
     }
   }
 }
