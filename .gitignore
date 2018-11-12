@@ -6,4 +6,4 @@ dist/
 *.log
 /index.html
 build/
-.gitignore
+.DS_store
