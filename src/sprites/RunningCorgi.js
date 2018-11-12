@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 export default class extends Phaser.Sprite {
   constructor({ game, x, y, scaleX, scaleY, anchor, inputEnabled = false }) {
-    super(game, x, y, 'running-corgi');
+    super(game, x, y, 'running-right-corgi');
     this.scale.setTo(scaleX, scaleY);
     this.anchor.setTo(anchor); // set middle
     game.add.existing(this);
