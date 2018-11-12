@@ -3,7 +3,7 @@ www/
 platforms/
 plugins/
 dist/
-.vscode/
 *.log
 /index.html
 build/
+.gitignore
