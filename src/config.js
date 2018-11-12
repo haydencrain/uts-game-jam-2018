@@ -5,4 +5,5 @@ export default {
   webfonts: ['Press Start 2P'],
   defaultFont: '28px Press Start 2P',
   smallerFont: '20px Press Start 2P',
+  borkFont: '12px Press Start 2P',
 };
