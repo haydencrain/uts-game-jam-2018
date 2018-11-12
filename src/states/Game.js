@@ -7,11 +7,15 @@ export default class extends Phaser.State {
   init() {
     this.globalData = {
       score: 0,
+      multiplier: 1,
     };
 
     this.leftPanel = new DogView({
       gameState: this,
-
+      height: this.world.height,
+      width: this.world.width / 3,
+      x: 0,
+      y: 0,
     });
 
     this.middlePanel = new GrandmaView({
