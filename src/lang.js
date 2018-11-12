@@ -2,7 +2,7 @@ import idiom from 'idiom.js';
 
 const lang = idiom({
   default: {
-    welcome: 'Welcome to Phaser + ES6 + Webpack!',
+    welcome: 'Click the Corgi to start! ',
   },
   'pt-BR': {
     welcome: 'Bem vindo ao Phaser + ES6 + Webpack!',

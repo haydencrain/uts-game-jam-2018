@@ -10,13 +10,11 @@ export default class extends Phaser.State {
 
   create() {
     const bannerText = lang.text('welcome');
-    const banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText, {
+    const banner = this.add.text(this.world.centerX, 80, bannerText, {
       font: '40px Bangers',
       fill: '#77BFA3',
       smoothed: false,
     });
-
-    banner.padding.set(10, 16);
     banner.anchor.setTo(0.5);
 
     this.corgiSwim = new CorgiSwim({
@@ -27,9 +25,12 @@ export default class extends Phaser.State {
       scaleY: 0.5,
       anchor: 0.5,
       asset: 'corgi-swim',
+      inputEnabled: true,
     });
-
     this.corgiSwim.swim();
+    this.corgiSwim.addOnClickListener(() => {
+      console.log('corgi was clicked');
+    });
   }
 
   render() {
