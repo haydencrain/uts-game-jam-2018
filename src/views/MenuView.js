@@ -48,7 +48,7 @@ export default class MenuView {
         asset: 'button-press',
         inputEnabled: true,
         price: 100,
-        increment: 3,
+        increment: 2,
         message: 'Get Grandma (100 BP)',
       });
       this.skill2Button.addOnInputDownClickListener(() => {
