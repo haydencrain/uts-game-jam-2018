@@ -6,7 +6,7 @@ import MenuView from '../views/MenuView';
 export default class extends Phaser.State {
   init() {
     this.globalData = {
-      score: 1000000000,
+      score: 0,
       multiplier: 1,
       isSpooked: false,
     };
