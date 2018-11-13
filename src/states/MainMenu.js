@@ -1,4 +1,3 @@
-/* globals __DEV__ */
 import Phaser from 'phaser';
 import RunningCorgi from '../sprites/RunningCorgi';
 import lang from '../lang';
