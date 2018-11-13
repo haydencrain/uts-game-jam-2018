@@ -13,7 +13,7 @@ export default class DogView {
     this.y = y;
 
     this.isBarking = false;
-
+    this.dog = '';
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
     this.render = this.render.bind(this);
@@ -39,7 +39,6 @@ export default class DogView {
     this.score.anchor.setTo(0.5);
 
     this.createMainDog();
-    // this.createSwoleDog();
   }
 
   update() {
@@ -51,6 +50,7 @@ export default class DogView {
   }
 
   createMainDog() {
+    if (this.dog) this.dog.destroy();
     this.dog = new MainDog({
       game: this.gameState.game,
       x: this.getCenterX(),
@@ -85,12 +85,13 @@ export default class DogView {
   }
 
   createSwoleDog() {
+    if (this.dog) this.dog.destroy();
     this.dog = new SwoleDog({
       game: this.gameState.game,
       x: this.getCenterX(),
       y: this.getCenterY() - 83,
-      scaleX: 3,
-      scaleY: 3,
+      scaleX: 1,
+      scaleY: 1,
       anchor: 0.5,
       inputEnabled: true,
     });
