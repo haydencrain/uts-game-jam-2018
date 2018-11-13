@@ -6,4 +6,4 @@ dist/
 *.log
 /index.html
 build/
-.DS_store
+**/.DS_Store

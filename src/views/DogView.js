@@ -86,10 +86,10 @@ export default class DogView {
   }
 
   getCenterX() {
-    return (this.width - this.x) / 2;
+    return (this.width / 2) + this.x;
   }
 
   getCenterY() {
-    return (this.height - this.y) / 2;
+    return (this.height / 2) + this.y;
   }
 }
