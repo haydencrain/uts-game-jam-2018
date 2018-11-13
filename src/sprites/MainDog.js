@@ -11,6 +11,7 @@ export default class extends Phaser.Sprite {
     this.bark = this.bark.bind(this);
     this.unbark = this.unbark.bind(this);
     this.addOnMouseDownListener = this.addOnMouseDownListener.bind(this);
+    this.getRandomBarkSound = this.getRandomBarkSound.bind(this);
 
     this.inputEnabled = inputEnabled;
     if (this.inputEnabled) {
@@ -26,6 +27,11 @@ export default class extends Phaser.Sprite {
     this.animations.add('idle', [0, 3], 2, true);
     this.animations.add('bork', [1, 2], 6, false);
     this.animations.add('unbork', [2, 3], 8, false);
+
+
+    this.isBarking = false;
+    this.sounds = ['dog-arf', 'big-bark'];
+    this.currentSound = '';
   }
 
   idle() {
@@ -33,7 +39,17 @@ export default class extends Phaser.Sprite {
   }
 
   bark() {
-    this.play('bork');
+    if (!this.isBarking) {
+      this.isBarking = true;
+      this.currentSound = this.game.add.audio(this.getRandomBarkSound());
+      this.currentSound.play();
+      this.play('bork');
+      this.currentSound.onStop.add(() => {
+        this.isBarking = false;
+      }, this);
+    } else {
+      this.play('bork');
+    }
   }
 
   unbark() {
@@ -48,5 +64,9 @@ export default class extends Phaser.Sprite {
   addOnMouseUpListener(listener) {
     if (this.inputEnabled) this.events.onInputUp.add(listener, this);
     else throw Error('Image has not enabled input!');
+  }
+
+  getRandomBarkSound() {
+    return this.sounds[Math.floor(Math.random() * this.sounds.length)];
   }
 }

@@ -16,6 +16,10 @@ export default class extends Phaser.State {
     this.load.image('doggy_background', 'assets/background/doggo_background_banner_3x.png');
     this.load.image('street_background', 'assets/background/street_background_3x.png');
 
+    // audio
+    this.load.audio('dog-arf', ['assets/audio/dog-arf.mp3', 'assets/audio/dog-arf.ogg']);
+    this.load.audio('big-bark', ['assets/audio/big-bark.mp3', 'assets/audio/big-bark.ogg']);
+
     // sprites
     this.load.spritesheet('corgi-swim', 'assets/sprite-models/corgi-swim/corgi-swim.png', 700, 700, 12);
     this.load.spritesheet('running-left-corgi', 'assets/sprite-models/running-left-corgi/running-left-corgi-spritesheet.png', 50, 40, 8);
