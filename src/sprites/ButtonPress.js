@@ -51,6 +51,7 @@ export default class extends Phaser.Sprite {
     if (this.isActive) {
       this.text.x -= 2;
       this.text.y -= 2;
+      this.purchase();
     }
     this.isHeld = false;
     this.isActive = true;
@@ -94,9 +95,7 @@ export default class extends Phaser.Sprite {
   }
 
   purchase() {
-    if (this.isActive) {
-      this.gameState.globalData.multiplier += this.increment;
-      this.gameState.globalData.score -= this.price;
-    }
+    this.gameState.globalData.multiplier += this.increment;
+    this.gameState.globalData.score -= this.price;
   }
 }
