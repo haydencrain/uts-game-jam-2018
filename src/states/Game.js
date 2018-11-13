@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import DogView from '../views/DogView';
-import GrandmaView from '../views/GrandmaView';
+import StreetView from '../views/StreetView';
 import MenuView from '../views/MenuView';
 
 export default class extends Phaser.State {
@@ -18,7 +18,7 @@ export default class extends Phaser.State {
       y: 0,
     });
 
-    this.middlePanel = new GrandmaView({
+    this.middlePanel = new StreetView({
       gameState: this,
       height: this.world.height,
       width: 450,
@@ -28,6 +28,9 @@ export default class extends Phaser.State {
 
     this.rightPanel = new MenuView({
       gameState: this,
+      height: 0,
+      width: 900,
+
 
     });
   }
