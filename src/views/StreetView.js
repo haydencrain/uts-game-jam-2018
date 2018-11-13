@@ -1,6 +1,5 @@
 import Grandma from '../sprites/Grandma';
 import { getRandomX } from '../utils';
-import RunningCorgi from '../sprites/RunningCorgi';
 
 
 export default class StreetView {

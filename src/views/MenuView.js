@@ -8,6 +8,7 @@ export default class MenuView {
     this.width = width;
     this.x = x;
     this.y = y;
+    this.buttonX = this.x - 32;
     this.steps = 0;
     this.getMultiplier = this.getMultiplier.bind(this);
 
@@ -16,11 +17,14 @@ export default class MenuView {
   }
 
   create() {
+    // add background
+    this.background = this.gameState.add.tileSprite(this.x, this.y, this.width, this.height, 'menu_background');
+
     if (this.steps === 0) {
       this.skill1Button = new ButtonPress({
         gameState: this.gameState,
-        x: this.width - 30,
-        y: this.height + 140,
+        x: this.buttonX,
+        y: this.y + 40,
         scaleX: 1.7,
         scaleY: 1,
         anchor: 0,
@@ -40,8 +44,8 @@ export default class MenuView {
 
       this.skill2Button = new ButtonPress({
         gameState: this.gameState,
-        x: this.width - 30,
-        y: this.height + 240,
+        x: this.buttonX,
+        y: this.y + 80,
         scaleX: 1.7,
         scaleY: 1,
         anchor: 0,
@@ -63,8 +67,8 @@ export default class MenuView {
 
       this.skill3Button = new ButtonPress({
         gameState: this.gameState,
-        x: this.width - 30,
-        y: this.height + 340,
+        x: this.buttonX,
+        y: this.y + 120,
         scaleX: 1.7,
         scaleY: 1,
         anchor: 0,
@@ -84,8 +88,8 @@ export default class MenuView {
 
       this.skill4Button = new ButtonPress({
         gameState: this.gameState,
-        x: this.width - 30,
-        y: this.height + 440,
+        x: this.buttonX,
+        y: this.y + 160,
         scaleX: 1.7,
         scaleY: 1,
         anchor: 0,
@@ -105,8 +109,8 @@ export default class MenuView {
 
       this.skill5Button = new ButtonPress({
         gameState: this.gameState,
-        x: this.width - 30,
-        y: this.height + 540,
+        x: this.buttonX,
+        y: this.y + 200,
         scaleX: 1.7,
         scaleY: 1,
         anchor: 0,
@@ -124,7 +128,7 @@ export default class MenuView {
         this.skill1Button.purchase();
       });
     }
-    this.skills = this.gameState.add.text(this.width + 10, this.height + 100, 'Skills', {
+    this.skills = this.gameState.add.text(this.buttonX, this.y + 300, 'Skills', {
       font: config.menuFont,
       fill: '#77BFA3',
       smoothed: false,
@@ -132,7 +136,7 @@ export default class MenuView {
       wordWrapWidth: 20,
       align: 'center',
     });
-    this.hires = this.gameState.add.text(this.width + 150, this.height + 100, 'Hires', {
+    this.hires = this.gameState.add.text(this.buttonX, this.y + 340, 'Hires', {
       font: config.menuFont,
       fill: '#77BFA3',
       smoothed: false,
@@ -140,7 +144,7 @@ export default class MenuView {
       wordWrapWidth: 20,
       align: 'center',
     });
-    this.special = this.gameState.add.text(this.width + 270, this.height + 100, 'Special', {
+    this.special = this.gameState.add.text(this.buttonX, this.y + 380, 'Special', {
       font: config.menuFont,
       fill: '#77BFA3',
       smoothed: false,
@@ -148,7 +152,7 @@ export default class MenuView {
       wordWrapWidth: 20,
       align: 'center',
     });
-    this.pointsPerClick = this.gameState.add.text(this.width + 30, this.height + 40, this.getMultiplier(), {
+    this.pointsPerClick = this.gameState.add.text(this.buttonX, this.y + 420, this.getMultiplier(), {
       font: config.menuFont,
       fill: '#77BFA3',
       smoothed: false,

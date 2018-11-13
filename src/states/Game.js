@@ -28,10 +28,10 @@ export default class extends Phaser.State {
 
     this.rightPanel = new MenuView({
       gameState: this,
-      height: 0,
-      width: 900,
-
-
+      height: this.world.height,
+      width: 380,
+      x: 900,
+      y: 0,
     });
 
     this.theme = new Phaser.Sound(this.game, 'theme-song', 1, true);
