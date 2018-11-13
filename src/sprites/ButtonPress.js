@@ -16,7 +16,7 @@ export default class extends Phaser.Sprite {
     this.increment = increment;
     this.message = message;
 
-    this.priceMultiplier = [25, 50, 100, 500, 1000];
+    this.priceMultiplier = [25, 50, 500, 2000, 10000];
     this.value = value;
 
     this.currLvl = level;

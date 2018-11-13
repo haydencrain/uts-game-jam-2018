@@ -77,7 +77,7 @@ export default class MenuView {
       anchor: 0,
       asset: 'button-press',
       inputEnabled: true,
-      price: 100,
+      price: 500,
       increment: 5,
       message: 'Get Grandpa',
       level: 0,
@@ -102,7 +102,7 @@ export default class MenuView {
       anchor: 0,
       asset: 'button-press',
       inputEnabled: true,
-      price: 500,
+      price: 2000,
       increment: 20,
       message: 'Get Swole',
       level: 0,
@@ -113,7 +113,9 @@ export default class MenuView {
     });
     this.skill4Button.addOnInputOutClickListener(() => {
       this.skill4Button.unpress();
-      this.skill4Button.purchase();
+      if (this.skill4Button.purchase() && this.skill4Button.currLvl === 1) {
+        this.gameState.leftPanel.createSwoleDog();
+      }
     });
 
     this.skill5Button = new ButtonPress({
@@ -125,7 +127,7 @@ export default class MenuView {
       anchor: 0,
       asset: 'button-press',
       inputEnabled: true,
-      price: 1000,
+      price: 10000,
       increment: 50,
       message: 'Illuminati Status',
       level: 0,
