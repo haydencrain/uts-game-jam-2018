@@ -12,8 +12,9 @@ export default class DogView {
     this.x = x;
     this.y = y;
 
+    this.isSwole = false;
     this.isBarking = false;
-    this.dog = '';
+    this.dog = null;
     this.create = this.create.bind(this);
     this.update = this.update.bind(this);
     this.render = this.render.bind(this);
@@ -22,6 +23,7 @@ export default class DogView {
     this.getCenterY = this.getCenterY.bind(this);
     this.createMainDog = this.createMainDog.bind(this);
     this.createSwoleDog = this.createSwoleDog.bind(this);
+    this.createIlluminatiDog = this.createIlluminatiDog.bind(this);
   }
 
   create() {
@@ -60,6 +62,7 @@ export default class DogView {
       anchor: 0.5,
       inputEnabled: true,
     });
+    this.isSwole = false;
 
     this.dog.addOnMouseDownListener(() => {
       this.isBarking = true;
@@ -95,6 +98,7 @@ export default class DogView {
       anchor: 0.5,
       inputEnabled: true,
     });
+    this.isSwole = true;
 
     this.dog.addOnMouseDownListener(() => {
       this.isBarking = true;
@@ -117,6 +121,13 @@ export default class DogView {
 
     // initial animation is idle
     this.dog.idle();
+  }
+
+  createIlluminatiDog() {
+    if (!this.isSwole) {
+      this.createSwoleDog();
+    }
+    this.dog.isIlluminati = true;
   }
 
   incrementBorkpower() {

@@ -7,7 +7,7 @@ export default class extends Phaser.Sprite {
     this.anchor.setTo(anchor); // set middle
     game.add.existing(this);
 
-    this.isIlluminati = true;
+    this.isIlluminati = false;
 
     this.idle = this.idle.bind(this);
     this.bark = this.bark.bind(this);

@@ -139,6 +139,7 @@ export default class MenuView {
     this.skill5Button.addOnInputOutClickListener(() => {
       this.skill5Button.unpress();
       this.skill5Button.purchase();
+      this.gameState.leftPanel.createIlluminatiDog();
     });
     this.skills = this.gameState.add.text(this.buttonX + 150, this.y + 110, 'Upgrades', {
       font: config.menuFont,
