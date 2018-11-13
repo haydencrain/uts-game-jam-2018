@@ -3,7 +3,7 @@ import config from '../config';
 
 
 export default class extends Phaser.Sprite {
-  constructor({ gameState, x, y, scaleX, scaleY, anchor, asset, inputEnabled = false, price, increment, message, level }) {
+  constructor({ gameState, x, y, scaleX, scaleY, anchor, asset, inputEnabled = false, price, increment, message, level, value }) {
     super(gameState.game, x, y, asset);
     this.scale.setTo(scaleX, scaleY);
     this.anchor.setTo(anchor); // set middle
@@ -15,6 +15,9 @@ export default class extends Phaser.Sprite {
     this.isHeld = false;
     this.increment = increment;
     this.message = message;
+
+    this.priceMultiplier = [25, 50, 100, 500, 1000];
+    this.value = value;
 
     this.currLvl = level;
 
@@ -100,6 +103,7 @@ export default class extends Phaser.Sprite {
     if (this.gameState.globalData.score >= this.price) {
       this.gameState.globalData.multiplier += this.increment;
       this.gameState.globalData.score -= this.price;
+      this.price += this.priceMultiplier[this.value];
       this.currLvl += 1;
       return true;
     }
@@ -107,6 +111,6 @@ export default class extends Phaser.Sprite {
   }
 
   getTextMessage() {
-    return `LVL${this.currLvl} ${this.message}`;
+    return `LVL${this.currLvl} ${this.message} (${this.price} BP)`;
   }
 }

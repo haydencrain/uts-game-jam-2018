@@ -31,8 +31,9 @@ export default class MenuView {
       inputEnabled: true,
       price: 25,
       increment: 1,
-      message: 'Upgrade Bark (25 BP)',
+      message: 'Upgrade Bark',
       level: 1,
+      value: 0,
     });
     this.skill1Button.addOnInputDownClickListener(() => {
       this.skill1Button.press();
@@ -53,8 +54,9 @@ export default class MenuView {
       inputEnabled: true,
       price: 50,
       increment: 2,
-      message: 'Get Grandma (100 BP)',
+      message: 'Get Grandma',
       level: 0,
+      value: 1,
     });
     this.skill2Button.addOnInputDownClickListener(() => {
       this.skill2Button.press();
@@ -77,15 +79,18 @@ export default class MenuView {
       inputEnabled: true,
       price: 100,
       increment: 5,
-      message: 'Get Grandpa (200 BP)',
+      message: 'Get Grandpa',
       level: 0,
+      value: 2,
     });
     this.skill3Button.addOnInputDownClickListener(() => {
       this.skill3Button.press();
     });
     this.skill3Button.addOnInputOutClickListener(() => {
       this.skill3Button.unpress();
-      this.skill3Button.purchase();
+      if (this.skill3Button.purchase()) {
+        this.gameState.middlePanel.createGrandpa();
+      }
     });
 
     this.skill4Button = new ButtonPress({
@@ -99,8 +104,9 @@ export default class MenuView {
       inputEnabled: true,
       price: 500,
       increment: 20,
-      message: 'Get Swole (500 BP)',
+      message: 'Get Swole',
       level: 0,
+      value: 3,
     });
     this.skill4Button.addOnInputDownClickListener(() => {
       this.skill4Button.press();
@@ -121,8 +127,9 @@ export default class MenuView {
       inputEnabled: true,
       price: 1000,
       increment: 50,
-      message: 'Illuminati Status (1000 BP)',
+      message: 'Illuminati Status',
       level: 0,
+      value: 4,
     });
     this.skill5Button.addOnInputDownClickListener(() => {
       this.skill5Button.press();
