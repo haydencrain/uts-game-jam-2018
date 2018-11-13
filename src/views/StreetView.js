@@ -26,19 +26,6 @@ export default class StreetView {
     this.background = this.gameState.add.tileSprite(this.x, this.y, this.width, this.height, 'street_background');
 
     this.grandma = this.createGrandma();
-
-    // delete later
-    this.runningDog = new RunningCorgi({
-      game: this.gameState.game,
-      x: this.getCenterX(),
-      y: this.getCenterY(),
-      scaleX: 2,
-      scaleY: 2,
-      anchor: 0.5,
-      inputEnabled: true,
-    });
-    this.runningDog.run();
-    this.runningDog.addOnClickListener(() => this.grandmas.push(this.createGrandma()));
   }
 
   update() {

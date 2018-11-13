@@ -13,16 +13,18 @@ export default class extends Phaser.Sprite {
     this.y = y;
     this.isActive = false;
     this.isHeld = false;
-
     this.increment = increment;
     this.message = message;
 
+    this.currLvl = 1;
+
     this.press = this.press.bind(this);
     this.purchase = this.purchase.bind(this);
+    this.getTextMessage = this.getTextMessage.bind(this);
     this.price = price;
     this.inputEnabled = inputEnabled;
 
-    this.text = this.gameState.add.text(this.x + 50, this.y + 30, this.message, {
+    this.text = this.gameState.add.text(this.x + 50, this.y + 30, this.getTextMessage(), {
       font: config.submenuFont,
       fill: '#77BFA3',
       smoothed: false,
@@ -51,7 +53,6 @@ export default class extends Phaser.Sprite {
     if (this.isActive) {
       this.text.x -= 2;
       this.text.y -= 2;
-      this.purchase();
     }
     this.isHeld = false;
     this.isActive = true;
@@ -92,10 +93,20 @@ export default class extends Phaser.Sprite {
     } else {
       this.play('inactive');
     }
+    this.text.setText(this.getTextMessage());
   }
 
   purchase() {
-    this.gameState.globalData.multiplier += this.increment;
-    this.gameState.globalData.score -= this.price;
+    if (this.gameState.globalData.score >= this.price) {
+      this.gameState.globalData.multiplier += this.increment;
+      this.gameState.globalData.score -= this.price;
+      this.currLvl += 1;
+      return true;
+    }
+    return false;
+  }
+
+  getTextMessage() {
+    return `LVL ${this.currLvl} ${this.message}`;
   }
 }
