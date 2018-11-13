@@ -20,6 +20,9 @@ export default class extends Phaser.State {
     // audio
     this.load.audio('dog-arf', ['assets/audio/barks/dog-arf/dog-arf.mp3', 'assets/audio/barks/dog-arf/dog-arf.ogg']);
     this.load.audio('big-bark', ['assets/audio/barks/big-bark/big-bark.mp3', 'assets/audio/barks/big-bark/big-bark.ogg']);
+    this.load.audio('andre-bark', ['assets/audio/barks/andre/andre.mp3', 'assets/audio/barks/andre/andre.ogg']);
+    this.load.audio('sheng-bark', ['assets/audio/barks/sheng/sheng.mp3', 'assets/audio/barks/sheng/sheng.ogg']);
+    this.load.audio('hayden-bark', ['assets/audio/barks/hayden/hayden.mp3', 'assets/audio/barks/hayden/hayden.ogg']);
     this.load.audio('theme-song', ['assets/audio/theme/theme-song.mp3', 'assets/audio/theme/theme-song.ogg']);
 
     // sprites

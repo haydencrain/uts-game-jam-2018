@@ -6,7 +6,7 @@ import MenuView from '../views/MenuView';
 export default class extends Phaser.State {
   init() {
     this.globalData = {
-      score: 0,
+      score: 1000000000,
       multiplier: 1,
     };
 
@@ -35,6 +35,7 @@ export default class extends Phaser.State {
     });
 
     this.theme = new Phaser.Sound(this.game, 'theme-song', 1, true);
+    this.theme.volume = 0.8;
   }
 
   create() {

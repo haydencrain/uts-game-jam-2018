@@ -113,7 +113,7 @@ export default class MenuView {
     });
     this.skill4Button.addOnInputOutClickListener(() => {
       this.skill4Button.unpress();
-      if (this.skill4Button.purchase() && this.skill4Button.currLvl === 1) {
+      if (this.skill4Button.purchase() && !this.gameState.leftPanel.isSwole) {
         this.gameState.leftPanel.createSwoleDog();
       }
     });

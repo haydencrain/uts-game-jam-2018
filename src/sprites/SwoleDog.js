@@ -36,7 +36,7 @@ export default class extends Phaser.Sprite {
 
 
     this.isBarking = false;
-    this.sounds = ['dog-arf', 'big-bark'];
+    this.sounds = ['hayden-bark', 'sheng-bark', 'andre-bark'];
     this.currentSound = '';
   }
 
