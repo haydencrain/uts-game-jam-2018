@@ -1,6 +1,7 @@
 import config from '../config';
 // import RunningCorgi from '../sprites/RunningCorgi';
 import MainDog from '../sprites/MainDog';
+import SwoleDog from '../sprites/SwoleDog';
 import BorkText from '../components/BorkText';
 
 export default class DogView {
@@ -19,6 +20,8 @@ export default class DogView {
     this.getScoreString = this.getScoreString.bind(this);
     this.getCenterX = this.getCenterX.bind(this);
     this.getCenterY = this.getCenterY.bind(this);
+    this.createMainDog = this.createMainDog.bind(this);
+    this.createSwoleDog = this.createSwoleDog.bind(this);
   }
 
   create() {
@@ -35,7 +38,19 @@ export default class DogView {
     });
     this.score.anchor.setTo(0.5);
 
+    this.createMainDog();
+    // this.createSwoleDog();
+  }
 
+  update() {
+    if (!this.isBarking) this.dog.idle();
+  }
+
+  render() {
+    this.score.setText(this.getScoreString());
+  }
+
+  createMainDog() {
     this.dog = new MainDog({
       game: this.gameState.game,
       x: this.getCenterX(),
@@ -52,7 +67,7 @@ export default class DogView {
       this.borkText = new BorkText({
         gameState: this.gameState,
         x: this.getCenterX() + 60,
-        y: this.getCenterY() - 50,
+        y: this.getCenterY() - 55,
         width: 100,
         height: 100,
       });
@@ -69,12 +84,38 @@ export default class DogView {
     this.dog.idle();
   }
 
-  update() {
-    if (!this.isBarking) this.dog.idle();
-  }
+  createSwoleDog() {
+    this.dog = new SwoleDog({
+      game: this.gameState.game,
+      x: this.getCenterX(),
+      y: this.getCenterY() - 83,
+      scaleX: 3,
+      scaleY: 3,
+      anchor: 0.5,
+      inputEnabled: true,
+    });
 
-  render() {
-    this.score.setText(this.getScoreString());
+    this.dog.addOnMouseDownListener(() => {
+      this.isBarking = true;
+      this.dog.bark();
+      this.borkText = new BorkText({
+        gameState: this.gameState,
+        x: this.getCenterX() + 60,
+        y: this.getCenterY() - 150,
+        width: 100,
+        height: 100,
+      });
+    });
+
+    this.dog.addOnMouseUpListener(() => {
+      this.borkText.finish();
+      this.dog.unbark();
+      this.incrementBorkpower();
+      this.isBarking = false;
+    });
+
+    // initial animation is idle
+    this.dog.idle();
   }
 
   incrementBorkpower() {

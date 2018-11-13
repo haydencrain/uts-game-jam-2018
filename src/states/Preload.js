@@ -23,11 +23,11 @@ export default class extends Phaser.State {
     this.load.audio('theme-song', ['assets/audio/theme/theme-song.mp3', 'assets/audio/theme/theme-song.ogg']);
 
     // sprites
-    this.load.spritesheet('corgi-swim', 'assets/sprite-models/corgi-swim/corgi-swim.png', 700, 700, 12);
     this.load.spritesheet('running-left-corgi', 'assets/sprite-models/running-left-corgi/running-left-corgi-spritesheet.png', 50, 40, 8);
     this.load.spritesheet('running-right-corgi', 'assets/sprite-models/running-right-corgi/running-right-corgi-spritesheet.png', 50, 40, 8);
     this.load.spritesheet('button-press', 'assets/sprite-models/button-press/button-press.png', 240, 96, 3);
     this.load.spritesheet('main-doggo-right', 'assets/sprite-models/main-doggo-right/main-doggo-right.png', 60, 50, 4);
+    this.load.spritesheet('swole-doggo', 'assets/sprite-models/swole-doggo/swole-doggo.png', 50, 100, 8);
     this.load.spritesheet('idle-grandma', 'assets/sprite-models/idle-grandma/idle-grandma.png', 40, 80, 2);
     this.load.spritesheet('idle-grandpa', 'assets/sprite-models/idle-grandpa/idle-grandpa.png', 50, 125, 2);
   }
