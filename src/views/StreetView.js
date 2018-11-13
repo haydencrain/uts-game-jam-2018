@@ -1,4 +1,5 @@
 import Grandma from '../sprites/Grandma';
+import Grandpa from '../sprites/Grandpa';
 import { getRandomX } from '../utils';
 
 
@@ -18,6 +19,7 @@ export default class StreetView {
     this.getCenterX = this.getCenterX.bind(this);
     this.getCenterY = this.getCenterY.bind(this);
     this.createGrandma = this.createGrandma.bind(this);
+    this.createGrandpa = this.createGrandpa.bind(this);
   }
 
   create() {
@@ -46,6 +48,17 @@ export default class StreetView {
       y: this.floorY,
       scaleX: 2,
       scaleY: 2,
+      anchor: 1,
+    });
+  }
+
+  createGrandpa() {
+    return new Grandpa({
+      game: this.gameState.game,
+      x: getRandomX(this.x + 150, 300),
+      y: this.floorY + 10,
+      scaleX: 1.8,
+      scaleY: 1.8,
       anchor: 1,
     });
   }
