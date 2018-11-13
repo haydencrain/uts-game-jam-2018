@@ -33,9 +33,12 @@ export default class extends Phaser.State {
 
 
     });
+
+    this.theme = new Phaser.Sound(this.game, 'theme-song', 1, true);
   }
 
   create() {
+    this.theme.play();
     this.leftPanel.create();
     this.middlePanel.create();
     this.rightPanel.create();
