@@ -3,7 +3,7 @@ import config from '../config';
 
 
 export default class extends Phaser.Sprite {
-  constructor({ gameState, x, y, scaleX, scaleY, anchor, asset, inputEnabled = false, price, increment, message }) {
+  constructor({ gameState, x, y, scaleX, scaleY, anchor, asset, inputEnabled = false, price, increment, message, level }) {
     super(gameState.game, x, y, asset);
     this.scale.setTo(scaleX, scaleY);
     this.anchor.setTo(anchor); // set middle
@@ -16,7 +16,7 @@ export default class extends Phaser.Sprite {
     this.increment = increment;
     this.message = message;
 
-    this.currLvl = 1;
+    this.currLvl = level;
 
     this.press = this.press.bind(this);
     this.purchase = this.purchase.bind(this);
