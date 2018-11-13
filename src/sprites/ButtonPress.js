@@ -107,6 +107,6 @@ export default class extends Phaser.Sprite {
   }
 
   getTextMessage() {
-    return `LVL ${this.currLvl} ${this.message}`;
+    return `LVL${this.currLvl} ${this.message}`;
   }
 }
