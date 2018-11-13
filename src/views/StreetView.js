@@ -41,7 +41,7 @@ export default class StreetView {
 
   createGrandma() {
     return new Grandma({
-      game: this.gameState.game,
+      gameState: this.gameState,
       x: getRandomX(this.x + 150, 300),
       y: this.floorY,
       scaleX: 2,
@@ -52,7 +52,7 @@ export default class StreetView {
 
   createGrandpa() {
     return new Grandpa({
-      game: this.gameState.game,
+      gameState: this.gameState,
       x: getRandomX(this.x + 150, 300),
       y: this.floorY + 10,
       scaleX: 1.8,

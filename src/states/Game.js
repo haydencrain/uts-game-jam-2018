@@ -8,6 +8,7 @@ export default class extends Phaser.State {
     this.globalData = {
       score: 1000000000,
       multiplier: 1,
+      isSpooked: false,
     };
 
     this.leftPanel = new DogView({

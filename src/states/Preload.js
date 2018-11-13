@@ -31,8 +31,8 @@ export default class extends Phaser.State {
     this.load.spritesheet('button-press', 'assets/sprite-models/button-press/button-press.png', 240, 96, 3);
     this.load.spritesheet('main-doggo-right', 'assets/sprite-models/main-doggo-right/main-doggo-right.png', 60, 50, 4);
     this.load.spritesheet('swole-doggo', 'assets/sprite-models/swole-doggo-3x/swole-doggo-3x.png', 150, 300, 8);
-    this.load.spritesheet('idle-grandma', 'assets/sprite-models/idle-grandma/idle-grandma.png', 40, 80, 2);
-    this.load.spritesheet('idle-grandpa', 'assets/sprite-models/idle-grandpa/idle-grandpa.png', 50, 125, 2);
+    this.load.spritesheet('idle-grandma', 'assets/sprite-models/idle-grandma/idle-grandma.png', 40, 80, 4);
+    this.load.spritesheet('idle-grandpa', 'assets/sprite-models/idle-grandpa/idle-grandpa.png', 50, 125, 4);
   }
 
   create() {
