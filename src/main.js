@@ -31,6 +31,7 @@ class Game extends Phaser.Game {
 
 window.game = new Game();
 
+
 if (window.cordova) {
   const app = {
     initialize() {

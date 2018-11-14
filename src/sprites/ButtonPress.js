@@ -3,8 +3,8 @@ import config from '../config';
 
 
 export default class extends Phaser.Sprite {
-  constructor({ gameState, x, y, scaleX, scaleY, anchor, asset, inputEnabled = false, price, increment, message, level, value }) {
-    super(gameState.game, x, y, asset);
+  constructor({ gameState, x, y, scaleX, scaleY, anchor, inputEnabled = false, message, dataName }) {
+    super(gameState.game, x, y, 'button-press');
     this.scale.setTo(scaleX, scaleY);
     this.anchor.setTo(anchor); // set middle
     this.game.add.existing(this);
@@ -13,18 +13,14 @@ export default class extends Phaser.Sprite {
     this.y = y;
     this.isActive = false;
     this.isHeld = false;
-    this.increment = increment;
     this.message = message;
+    this.dataName = dataName;
 
     this.priceMultiplier = [25, 50, 500, 2000, 10000];
-    this.value = value;
-
-    this.currLvl = level;
 
     this.press = this.press.bind(this);
     this.purchase = this.purchase.bind(this);
     this.getTextMessage = this.getTextMessage.bind(this);
-    this.price = price;
     this.inputEnabled = inputEnabled;
 
     this.text = this.gameState.add.text(this.x + 50, this.y + 30, this.getTextMessage(), {
@@ -86,7 +82,7 @@ export default class extends Phaser.Sprite {
   }
 
   update() {
-    this.gameState.globalData.score < this.price ? this.isActive = false : this.isActive = true;
+    this.gameState.globalData.score < this.gameState.globalData[this.dataName].price ? this.isActive = false : this.isActive = true;
 
 
     if (this.isActive && !this.isHeld) {
@@ -100,17 +96,17 @@ export default class extends Phaser.Sprite {
   }
 
   purchase() {
-    if (this.gameState.globalData.score >= this.price) {
-      this.gameState.globalData.multiplier += this.increment;
-      this.gameState.globalData.score -= this.price;
-      this.price += this.priceMultiplier[this.value];
-      this.currLvl += 1;
+    if (this.gameState.globalData.score >= this.gameState.globalData[this.dataName].price) {
+      this.gameState.globalData.multiplier += this.gameState.globalData[this.dataName].increment;
+      this.gameState.globalData.score -= this.gameState.globalData[this.dataName].price;
+      this.gameState.globalData[this.dataName].price += this.priceMultiplier[this.gameState.globalData[this.dataName].value];
+      this.gameState.globalData[this.dataName].level += 1;
       return true;
     }
     return false;
   }
 
   getTextMessage() {
-    return `LVL${this.currLvl} ${this.message} (${this.price} BP)`;
+    return `LVL${this.gameState.globalData[this.dataName].level} ${this.message} (${this.gameState.globalData[this.dataName].price} BP)`;
   }
 }

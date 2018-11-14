@@ -25,6 +25,14 @@ export default class StreetView {
   create() {
     // add background
     this.background = this.gameState.add.tileSprite(this.x, this.y, this.width, this.height, 'street_background');
+
+    for (let i = 0; i < this.gameState.globalData.grandpaButtonData.level; i++) {
+      this.grandmas.push(this.createGrandpa());
+    }
+
+    for (let i = 0; i < this.gameState.globalData.grandmaButtonData.level; i++) {
+      this.grandmas.push(this.createGrandma());
+    }
   }
 
   update() {
