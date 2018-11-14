@@ -11,6 +11,9 @@ export default class extends Phaser.State {
       isSpooked: false,
     };
 
+    const savedDataString = localStorage.getItem('globalData');
+    if (savedDataString) this.globalData = JSON.parse(savedDataString);
+
     this.leftPanel = new DogView({
       gameState: this,
       height: this.world.height,
@@ -37,9 +40,16 @@ export default class extends Phaser.State {
 
     this.theme = new Phaser.Sound(this.game, 'theme-song', 1, true);
     this.theme.volume = 0.8;
+
+    this.onBeforeUnload = this.onBeforeUnload.bind(this);
+    this.game.stage.disableVisibilityChange = true;
+
   }
 
   create() {
+    window.onbeforeunload = this.onBeforeUnload;
+    window.addEventListener("beforeunload", this.onBeforeUnload);
+
     this.theme.play();
     this.leftPanel.create();
     this.middlePanel.create();
@@ -54,5 +64,9 @@ export default class extends Phaser.State {
 
   render() {
     this.leftPanel.render();
+  }
+
+  onBeforeUnload() {
+    localStorage.setItem('globalData', JSON.stringify(this.globalData));
   }
 }
