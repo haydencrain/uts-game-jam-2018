@@ -1,13 +1,12 @@
 import Phaser from 'phaser';
 
 export default class extends Phaser.Sprite {
-  constructor({ game, x, y, scaleX, scaleY, anchor, inputEnabled = false }) {
-    super(game, x, y, 'swole-doggo');
+  constructor({ gameState, x, y, scaleX, scaleY, anchor, inputEnabled = false }) {
+    super(gameState.game, x, y, 'swole-doggo');
     this.scale.setTo(scaleX, scaleY);
     this.anchor.setTo(anchor); // set middle
-    game.add.existing(this);
-
-    this.isIlluminati = false;
+    gameState.game.add.existing(this);
+    this.gameState = gameState;
 
     this.idle = this.idle.bind(this);
     this.bark = this.bark.bind(this);
@@ -41,7 +40,7 @@ export default class extends Phaser.Sprite {
   }
 
   idle() {
-    if (!this.isIlluminati) {
+    if (!this.gameState.globalData.isIlluminati) {
       this.play('swole-idle');
     } else {
       this.play('illuminati-idle');
@@ -53,7 +52,7 @@ export default class extends Phaser.Sprite {
       this.isBarking = true;
       this.currentSound = this.game.add.audio(this.getRandomBarkSound());
       this.currentSound.play();
-      if (!this.isIlluminati) {
+      if (!this.gameState.globalData.isIlluminati) {
         this.play('swole-bork');
       } else {
         this.play('illuminati-bork');
@@ -61,7 +60,7 @@ export default class extends Phaser.Sprite {
       this.currentSound.onStop.add(() => {
         this.isBarking = false;
       }, this);
-    } else if (!this.isIlluminati) {
+    } else if (!this.gameState.globalData.isIlluminati) {
       this.play('swole-bork');
     } else {
       this.play('illuminati-bork');
@@ -69,7 +68,7 @@ export default class extends Phaser.Sprite {
   }
 
   unbark() {
-    if (!this.isIlluminati) {
+    if (!this.gameState.globalData.isIlluminati) {
       this.play('swole-unbork');
     } else {
       this.play('illuminati-unbork');

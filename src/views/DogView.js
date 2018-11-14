@@ -12,7 +12,6 @@ export default class DogView {
     this.x = x;
     this.y = y;
 
-    this.isSwole = false;
     this.isBarking = false;
     this.dog = null;
     this.create = this.create.bind(this);
@@ -40,7 +39,14 @@ export default class DogView {
     });
     this.score.anchor.setTo(0.5);
 
-    this.createMainDog();
+    if (this.gameState.globalData.isSwole) {
+      this.createSwoleDog();
+      if (this.gameState.globalData.isIlluminati) {
+        this.createIlluminatiDog();
+      }
+    } else {
+      this.createMainDog();
+    }
   }
 
   update() {
@@ -62,7 +68,7 @@ export default class DogView {
       anchor: 0.5,
       inputEnabled: true,
     });
-    this.isSwole = false;
+    this.gameState.globalData.isSwole = false;
 
     this.dog.addOnMouseDownListener(() => {
       this.isBarking = true;
@@ -90,7 +96,7 @@ export default class DogView {
   createSwoleDog() {
     if (this.dog) this.dog.destroy();
     this.dog = new SwoleDog({
-      game: this.gameState.game,
+      gameState: this.gameState,
       x: this.getCenterX(),
       y: this.getCenterY() - 83,
       scaleX: 1,
@@ -98,7 +104,7 @@ export default class DogView {
       anchor: 0.5,
       inputEnabled: true,
     });
-    this.isSwole = true;
+    this.gameState.globalData.isSwole = true;
 
     this.dog.addOnMouseDownListener(() => {
       this.isBarking = true;
@@ -124,10 +130,10 @@ export default class DogView {
   }
 
   createIlluminatiDog() {
-    if (!this.isSwole) {
+    if (!this.gameState.globalData.isSwole) {
       this.createSwoleDog();
     }
-    this.dog.isIlluminati = true;
+    this.gameState.globalData.isIlluminati = true;
   }
 
   incrementBorkpower() {

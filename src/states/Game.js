@@ -9,10 +9,42 @@ export default class extends Phaser.State {
       score: 0,
       multiplier: 1,
       isSpooked: false,
+      isSwole: false,
+      isIlluminati: false,
+      borkButtonData: {
+        level: 1,
+        price: 25,
+        increment: 1,
+        value: 0,
+      },
+      grandmaButtonData: {
+        level: 0,
+        price: 50,
+        increment: 2,
+        value: 1,
+      },
+      grandpaButtonData: {
+        level: 0,
+        price: 500,
+        increment: 5,
+        value: 2,
+      },
+      swoleButtonData: {
+        level: 0,
+        price: 2000,
+        increment: 20,
+        value: 3,
+      },
+      illuminatiButtonData: {
+        level: 0,
+        price: 10000,
+        increment: 50,
+        value: 4,
+      },
     };
 
-    const savedDataString = localStorage.getItem('globalData');
-    if (savedDataString) this.globalData = JSON.parse(savedDataString);
+    const savedData = JSON.parse(localStorage.getItem('globalData'));
+    if (savedData) this.globalData = Object.assign(this.globalData, savedData);
 
     this.leftPanel = new DogView({
       gameState: this,
@@ -43,12 +75,11 @@ export default class extends Phaser.State {
 
     this.onBeforeUnload = this.onBeforeUnload.bind(this);
     this.game.stage.disableVisibilityChange = true;
-
   }
 
   create() {
     window.onbeforeunload = this.onBeforeUnload;
-    window.addEventListener("beforeunload", this.onBeforeUnload);
+    window.addEventListener('beforeunload', this.onBeforeUnload);
 
     this.theme.play();
     this.leftPanel.create();

@@ -20,20 +20,17 @@ export default class MenuView {
     // add background
     this.background = this.gameState.add.tileSprite(this.x, this.y, this.width, this.height, 'menu_background');
 
+    console.log(this.gameState.globalData);
     this.skill1Button = new ButtonPress({
+      message: 'Upgrade Bark',
       gameState: this.gameState,
+      inputEnabled: true,
       x: this.buttonX,
       y: this.y + 150,
       scaleX: 1.7,
       scaleY: 1,
       anchor: 0,
-      asset: 'button-press',
-      inputEnabled: true,
-      price: 25,
-      increment: 1,
-      message: 'Upgrade Bark',
-      level: 1,
-      value: 0,
+      dataName: 'borkButtonData',
     });
     this.skill1Button.addOnInputDownClickListener(() => {
       this.skill1Button.press();
@@ -44,19 +41,15 @@ export default class MenuView {
     });
 
     this.skill2Button = new ButtonPress({
+      message: 'Get Grandma',
       gameState: this.gameState,
       x: this.buttonX,
       y: this.y + 250,
       scaleX: 1.7,
       scaleY: 1,
       anchor: 0,
-      asset: 'button-press',
       inputEnabled: true,
-      price: 50,
-      increment: 2,
-      message: 'Get Grandma',
-      level: 0,
-      value: 1,
+      dataName: 'grandmaButtonData',
     });
     this.skill2Button.addOnInputDownClickListener(() => {
       this.skill2Button.press();
@@ -69,19 +62,15 @@ export default class MenuView {
     });
 
     this.skill3Button = new ButtonPress({
+      message: 'Get Grandpa',
       gameState: this.gameState,
       x: this.buttonX,
       y: this.y + 350,
       scaleX: 1.7,
       scaleY: 1,
       anchor: 0,
-      asset: 'button-press',
       inputEnabled: true,
-      price: 500,
-      increment: 5,
-      message: 'Get Grandpa',
-      level: 0,
-      value: 2,
+      dataName: 'grandpaButtonData',
     });
     this.skill3Button.addOnInputDownClickListener(() => {
       this.skill3Button.press();
@@ -94,19 +83,15 @@ export default class MenuView {
     });
 
     this.skill4Button = new ButtonPress({
+      message: 'Get Swole',
       gameState: this.gameState,
       x: this.buttonX,
       y: this.y + 450,
       scaleX: 1.7,
       scaleY: 1,
       anchor: 0,
-      asset: 'button-press',
       inputEnabled: true,
-      price: 2000,
-      increment: 20,
-      message: 'Get Swole',
-      level: 0,
-      value: 3,
+      dataName: 'swoleButtonData',
     });
     this.skill4Button.addOnInputDownClickListener(() => {
       this.skill4Button.press();
@@ -119,27 +104,24 @@ export default class MenuView {
     });
 
     this.skill5Button = new ButtonPress({
+      message: 'Illuminati Status',
       gameState: this.gameState,
       x: this.buttonX,
       y: this.y + 550,
       scaleX: 1.7,
       scaleY: 1,
       anchor: 0,
-      asset: 'button-press',
       inputEnabled: true,
-      price: 10000,
-      increment: 50,
-      message: 'Illuminati Status',
-      level: 0,
-      value: 4,
+      dataName: 'illuminatiButtonData',
     });
     this.skill5Button.addOnInputDownClickListener(() => {
       this.skill5Button.press();
     });
     this.skill5Button.addOnInputOutClickListener(() => {
       this.skill5Button.unpress();
-      this.skill5Button.purchase();
-      this.gameState.leftPanel.createIlluminatiDog();
+      if (this.skill5Button.purchase()) {
+        this.gameState.leftPanel.createIlluminatiDog();
+      }
     });
     this.skills = this.gameState.add.text(this.buttonX + 150, this.y + 110, 'Upgrades', {
       font: config.menuFont,
