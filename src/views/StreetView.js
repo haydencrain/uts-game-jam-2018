@@ -2,7 +2,6 @@ import Grandma from '../sprites/Grandma';
 import Grandpa from '../sprites/Grandpa';
 import { getRandomX } from '../utils';
 
-
 export default class StreetView {
   constructor({ gameState, height, width, x, y }) {
     this.gameState = gameState;

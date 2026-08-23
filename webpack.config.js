@@ -14,12 +14,15 @@ const definePlugin = new webpack.DefinePlugin({
 });
 
 module.exports = {
+  mode: 'development',
+  // src/main.js already imports pixi/p2/phaser, so a separate `vendor` entry is
+  // redundant under webpack 5 -- optimization.splitChunks below carves the
+  // node_modules code out into vendor.bundle.js instead.
   entry: {
     app: [
-      'babel-polyfill',
+      'core-js/stable',
       path.resolve(__dirname, 'src/main.js'),
     ],
-    vendor: ['pixi', 'p2', 'phaser', 'webfontloader'],
   },
   devtool: 'cheap-source-map',
   output: {
@@ -28,28 +31,34 @@ module.exports = {
     publicPath: './dist/',
     filename: 'bundle.js',
   },
-  watch: true,
+  optimization: {
+    // webpack 5 replacement for webpack.optimize.CommonsChunkPlugin
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'all',
+          test: /[\\/]node_modules[\\/]/,
+          enforce: true,
+          filename: 'vendor.bundle.js',
+        },
+      },
+    },
+  },
   plugins: [
     definePlugin,
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'/* chunkName= */,
-      filename: 'vendor.bundle.js' /* filename= */,
-    }),
     new HtmlWebpackPlugin({
       filename: '../index.html',
       template: './src/index.html',
-      chunks: ['vendor', 'app'],
-      chunksSortMode: 'manual',
-      minify: {
-        removeAttributeQuotes: false,
-        collapseWhitespace: false,
-        html5: false,
-        minifyCSS: false,
-        minifyJS: false,
-        minifyURLs: false,
-        removeComments: false,
-        removeEmptyAttributes: false,
-      },
+      // html-webpack-plugin 5 defaults to deferred scripts in <head>; v2 (used
+      // before this upgrade) emitted blocking scripts at the end of <body>.
+      // src/main.js sizes the Phaser canvas from documentElement.clientWidth /
+      // clientHeight at script-execution time, so keep the v2 behaviour rather
+      // than change when that measurement happens. Chunk order (vendor before
+      // app) is resolved automatically from the splitChunks dependency graph.
+      inject: 'body',
+      scriptLoading: 'blocking',
+      minify: false,
       hash: false,
     }),
     new BrowserSyncPlugin({
@@ -66,26 +75,27 @@ module.exports = {
         test: /\.js$/, use: ['babel-loader'], include: path.join(__dirname, 'src'),
       },
       {
-        test: /pixi\.js/, use: ['expose-loader?PIXI'],
+        test: /pixi\.js/, loader: 'expose-loader', options: { exposes: 'PIXI' },
       },
       {
-        test: /phaser-split\.js$/, use: ['expose-loader?Phaser'],
+        test: /phaser-split\.js$/, loader: 'expose-loader', options: { exposes: 'Phaser' },
       },
       {
-        test: /p2\.js/, use: ['expose-loader?p2'],
+        test: /p2\.js/, loader: 'expose-loader', options: { exposes: 'p2' },
       },
     ],
-  },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
   },
   resolve: {
     alias: {
       phaser,
       pixi,
       p2,
+    },
+    // webpack 5 replacement for `node: { fs: 'empty', net: 'empty', tls: 'empty' }`
+    fallback: {
+      fs: false,
+      net: false,
+      tls: false,
     },
   },
 };

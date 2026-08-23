@@ -1,4 +1,4 @@
-import idiom from 'idiom.js';
+import idiom from './idiom';
 
 const lang = idiom({
   default: {

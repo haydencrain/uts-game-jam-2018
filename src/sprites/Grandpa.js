@@ -8,7 +8,6 @@ export default class extends Phaser.Sprite {
     gameState.game.add.existing(this);
     this.gameState = gameState;
 
-
     this.animations.add('idle', [0, 1], 4, true);
     this.animations.add('spooked', [2, 3], 4, true);
 
@@ -22,7 +21,6 @@ export default class extends Phaser.Sprite {
       this.play('idle');
     }
   }
-
 
   addOnClickListener(listener) {
     if (this.inputEnabled) this.events.onInputDown.add(listener, this);

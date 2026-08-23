@@ -33,7 +33,6 @@ export default class extends Phaser.Sprite {
     this.animations.add('illuminati-bork', [5], 6, false);
     this.animations.add('illuminati-unbork', [7, 6], 8, false);
 
-
     this.isBarking = false;
     this.sounds = ['hayden-bark', 'sheng-bark', 'andre-bark'];
     this.currentSound = '';
