@@ -3,7 +3,6 @@ import RunningCorgi from '../sprites/RunningCorgi';
 import lang from '../lang';
 import config from '../config';
 
-
 export default class extends Phaser.State {
   init() { }
 

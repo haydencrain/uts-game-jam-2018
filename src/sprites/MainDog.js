@@ -28,7 +28,6 @@ export default class extends Phaser.Sprite {
     this.animations.add('bork', [1, 2], 6, false);
     this.animations.add('unbork', [2, 3], 8, false);
 
-
     this.isBarking = false;
     this.sounds = ['dog-arf', 'big-bark'];
     this.currentSound = '';

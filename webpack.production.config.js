@@ -1,51 +1,59 @@
-var path = require('path')
-var webpack = require('webpack')
-var CleanWebpackPlugin = require('clean-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
-var WorkboxPlugin = require('workbox-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 // Phaser webpack config
-var phaserModule = path.join(__dirname, '/node_modules/phaser-ce/')
-var phaser = path.join(phaserModule, 'build/custom/phaser-split.js')
-var pixi = path.join(phaserModule, 'build/custom/pixi.js')
-var p2 = path.join(phaserModule, 'build/custom/p2.js')
+const phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
+const phaser = path.join(phaserModule, 'build/custom/phaser-split.js');
+const pixi = path.join(phaserModule, 'build/custom/pixi.js');
+const p2 = path.join(phaserModule, 'build/custom/p2.js');
 
-var definePlugin = new webpack.DefinePlugin({
-  __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'false'))
-})
+const definePlugin = new webpack.DefinePlugin({
+  __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'false')),
+});
 
 module.exports = {
+  mode: 'production',
   entry: {
     app: [
-      'babel-polyfill',
-      path.resolve(__dirname, 'src/main.js')
+      'core-js/stable',
+      path.resolve(__dirname, 'src/main.js'),
     ],
-    vendor: ['pixi', 'p2', 'phaser', 'webfontloader']
-
   },
   output: {
     path: path.resolve(__dirname, 'build'),
     publicPath: './',
-    filename: 'js/bundle.js'
+    filename: 'js/bundle.js',
+    // webpack 5 replacement for clean-webpack-plugin
+    clean: true,
+  },
+  optimization: {
+    // `mode: production` already minifies with terser, which replaces the old
+    // webpack.optimize.UglifyJsPlugin block.
+    minimize: true,
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'all',
+          test: /[\\/]node_modules[\\/]/,
+          enforce: true,
+          filename: 'js/vendor.bundle.js',
+        },
+      },
+    },
   },
   plugins: [
     definePlugin,
-    new CleanWebpackPlugin(['build']),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new webpack.optimize.UglifyJsPlugin({
-      drop_console: true,
-      minimize: true,
-      output: {
-        comments: false
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' /* chunkName= */ , filename: 'js/vendor.bundle.js' /* filename= */ }),
     new HtmlWebpackPlugin({
-      filename: 'index.html', // path.resolve(__dirname, 'build', 'index.html'),
+      filename: 'index.html',
       template: './src/index.html',
-      chunks: ['vendor', 'app'],
-      chunksSortMode: 'manual',
+      // See webpack.config.js: v2-style blocking <body> injection is kept
+      // because src/main.js reads layout metrics at script-execution time.
+      inject: 'body',
+      scriptLoading: 'blocking',
       minify: {
         removeAttributeQuotes: true,
         collapseWhitespace: true,
@@ -54,37 +62,47 @@ module.exports = {
         minifyJS: true,
         minifyURLs: true,
         removeComments: true,
-        removeEmptyAttributes: true
+        removeEmptyAttributes: true,
       },
-      hash: true
+      hash: true,
     }),
-    new CopyWebpackPlugin([
-      { from: 'assets', to: 'assets' },
-      { from: 'src/manifest.json', to: './manifest.json' }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'assets', to: 'assets' },
+        { from: 'src/manifest.json', to: './manifest.json' },
+      ],
+    }),
     new WorkboxPlugin.GenerateSW({
       clientsClaim: true,
-      skipWaiting: true
-    })
+      skipWaiting: true,
+    }),
   ],
   module: {
     rules: [
-      { test: /\.js$/, use: ['babel-loader'], include: path.join(__dirname, 'src') },
-      { test: /pixi\.js/, use: ['expose-loader?PIXI'] },
-      { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
-      { test: /p2\.js/, use: ['expose-loader?p2'] }
-    ]
-  },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
+      {
+        test: /\.js$/, use: ['babel-loader'], include: path.join(__dirname, 'src'),
+      },
+      {
+        test: /pixi\.js/, loader: 'expose-loader', options: { exposes: 'PIXI' },
+      },
+      {
+        test: /phaser-split\.js$/, loader: 'expose-loader', options: { exposes: 'Phaser' },
+      },
+      {
+        test: /p2\.js/, loader: 'expose-loader', options: { exposes: 'p2' },
+      },
+    ],
   },
   resolve: {
     alias: {
-      'phaser': phaser,
-      'pixi': pixi,
-      'p2': p2
-    }
-  }
-}
+      phaser,
+      pixi,
+      p2,
+    },
+    fallback: {
+      fs: false,
+      net: false,
+      tls: false,
+    },
+  },
+};

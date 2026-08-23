@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import config from '../config';
 
-
 export default class extends Phaser.Sprite {
   constructor({ gameState, x, y, scaleX, scaleY, anchor, inputEnabled = false, message, dataName }) {
     super(gameState.game, x, y, 'button-press');
@@ -70,7 +69,6 @@ export default class extends Phaser.Sprite {
     this.isHeld = false;
   }
 
-
   addOnInputDownClickListener(listener) {
     if (this.inputEnabled) this.events.onInputDown.add(listener, this);
     else throw Error('Image has not enabled input!');
@@ -83,7 +81,6 @@ export default class extends Phaser.Sprite {
 
   update() {
     this.gameState.globalData.score < this.gameState.globalData[this.dataName].price ? this.isActive = false : this.isActive = true;
-
 
     if (this.isActive && !this.isHeld) {
       this.play('active');
